@@ -1,0 +1,14 @@
+
+
+.App{
+  position: relative;
+  width: 100%;
+  min-height: 120vh;
+  padding-bottom: 120px;
+}
+
+@media(max-width:639px) {
+  .App {
+    padding-bottom: 440px;
+  }
+}
