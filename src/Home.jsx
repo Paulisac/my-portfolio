@@ -1,5 +1,4 @@
 
-
 import Casestudycard from "./Casestudycard";
 import Summary from "./Summary";
 import db from './index.js';
@@ -16,7 +15,7 @@ import { collection, getDocs } from "firebase/firestore";
 const getData=useCallback(async () => {
     const querySnapshot= await getDocs(collection(db, "casestudies"));
     setState(querySnapshot.docs.map((doc) => ({...doc.data(), id:doc.id})))
-},[collection])
+},[])
 
 useEffect(() => {
     getData()

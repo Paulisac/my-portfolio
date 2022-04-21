@@ -11,11 +11,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
-
         <Routes>
+        <Route path="/case-studies/:slug" element={<Casestudy />} />
           <Route path="/" element={<Home />} />
 
-          <Route path="/case-studies/:slug" element={<Casestudy />} />
+          
         </Routes>
         <Footer />
         <ScrollToTop smooth color="#000000" />
