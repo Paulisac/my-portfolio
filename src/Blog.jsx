@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Mythought from './Mythought'
 import { useParams } from 'react-router-dom'
-import { getFirestore, collection } from 'firebase/firestore/lite'
-import { FirestoreCollection } from 'react-firestore'
+import { collection, getDocs,  query,  where, } from "firebase/firestore";
+import db from "./index.js";
 
 function Blog() {
 
@@ -12,17 +12,29 @@ function Blog() {
     const [blog, setBlog] = useState(null)
     const [content, setContent] = useState([])
 
-    useEffect(() => {
-            const firestore = getFirestore();
-            collection(firestore, 'blogs').where('slug', '==', slug).get().then(res => {
-                if (!res.empty) {
-                    res.forEach(doc => {
-                        doc.ref.collection('content').get().then(res => setContent(res.docs.map(doc => doc.data())))
-                        setBlog(doc.data())
-                    })
-                }
-            })
-    }, [slug])
+    const q = query(collection(db, "blogs"), where("slug", "==", slug));
+    /*  console.log(q); */
+     
+     const getData = useCallback(async () => {
+       const querySnapshot = await getDocs(q);
+       const querys = await getDocs(
+           collection(db, "blogs"),
+           where("slug", "==", slug)
+         );
+       querySnapshot.forEach((doc) => {
+         // doc.data() is never undefined for query doc snapshots
+         setBlog(doc.data());
+         
+       });
+       setContent(querys.docs.map((doc) => ({...doc.data(), id:doc.id})));
+     
+     }, [ slug]);
+   
+     useEffect(() => {
+       getData();
+     }, [getData]);
+
+     console.log(content);
 
     const days = blog ? Math.floor(((Date.now() / 1000) - (blog.time.seconds)) / 60 /60 / 24) : "";
 
@@ -47,18 +59,11 @@ function Blog() {
             <div>
                 <div className="pt-28 px-4">
 
-                <FirestoreCollection path="/blogs">
+                
                     {
-                    d => (
-                        d.isLoading ? <h1>Loading</h1> :
-                            <>
-                                {
-                                    d.value.filter((doc) => doc.slug !== slug).slice(0, 3).map((doc, id) => <Mythought key={id} time={doc.time} title={doc.title} snippet={doc.snippet} slug={doc.slug} />)
-                                }
-                            </>
-                    )
+                      content.filter((r)=>r.slug !== slug).slice(0, 3).map((r, id) => <Mythought key={id} time={r.time} title={r.title} snippet={r.snippet} slug={r.slug} />)
                     }
-                    </FirestoreCollection>
+ 
                 </div>
             </div>
         </div>
