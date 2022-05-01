@@ -1,40 +1,42 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Mythought from './Mythought'
 import { useParams } from 'react-router-dom'
-import { collection, getDocs,  query,  where, } from "firebase/firestore";
+import { collection, collectionGroup, getDocs,  getDoc, query,  where, doc} from "firebase/firestore";
 import db from "./index.js";
 
 function Blog() {
 
     
     const { slug } = useParams()
+    console.log(slug)
 
     const [blog, setBlog] = useState(null)
     const [content, setContent] = useState([])
 
-    const q = query(collection(db, "blogs"), where("slug", "==", slug));
-    /*  console.log(q); */
-     
-     const getData = useCallback(async () => {
-       const querySnapshot = await getDocs(q);
-       const querys = await getDocs(
-           collection(db, "blogs"),
-           where("slug", "==", slug)
-         );
-       querySnapshot.forEach((doc) => {
-         // doc.data() is never undefined for query doc snapshots
-         setBlog(doc.data());
-         
-       });
-       setContent(querys.docs.map((doc) => ({...doc.data(), id:doc.id})));
-     
-     }, [ slug]);
+    const getData = useCallback(async () => {
+    const q = collection(db, "blogs");
+    console.log(q); 
+    const querySnapshot = await getDocs(q);
+    const queryData = querySnapshot.docs.map((detail) => ({
+        ...detail.data(),
+        id: detail.id,
+    }))
+    console.log(queryData);
+    queryData.map(async (d, id) => {
+       console.log(d.id);
+       const querys = await getDocs(query(collection(db, `blogs/${d.id}/content`)))
+       console.log(querys);
+       console.log(querys.docs.map(doc => doc.data()))
+    })
+   
+});
+  
    
      useEffect(() => {
        getData();
      }, [getData]);
 
-     console.log(content);
+    //  console.log(content);
 
     const days = blog ? Math.floor(((Date.now() / 1000) - (blog.time.seconds)) / 60 /60 / 24) : "";
 
@@ -59,10 +61,10 @@ function Blog() {
             <div>
                 <div className="pt-28 px-4">
 
-                
+{/*                 
                     {
                       content.filter((r)=>r.slug !== slug).slice(0, 3).map((r, id) => <Mythought key={id} time={r.time} title={r.title} snippet={r.snippet} slug={r.slug} />)
-                    }
+                    } */}
  
                 </div>
             </div>
