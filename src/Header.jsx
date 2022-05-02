@@ -24,10 +24,10 @@ function Header() {
                 </button></div>
 
             <div className={`navg flex-wrap container justify-center sm:flex-row  sm:items-center sm:flex hidden sm:bg-white ${isNavOpen ? 'visible' : ''}`}>
-                <NavLink onClick={()=>{toggleNav(false)}} exact={true} activeClassName="active" to="/" className={tabClasses}>Case Studies</NavLink>
-                <NavLink onClick={()=>{toggleNav(false)}} activeClassName="active" to="/notes" className={tabClasses} exact>Notes</NavLink>
-                <NavLink onClick={()=>{toggleNav(false)}} activeClassName="active" to="/display" className={tabClasses}>Display</NavLink>
-                <NavLink onClick={()=>{toggleNav(false)}} activeClassName="active" to="/about" className={tabClasses}>About</NavLink>
+                <NavLink onClick={()=>{toggleNav(false)}} to="/" className={tabClasses}>Case Studies</NavLink>
+                <NavLink onClick={()=>{toggleNav(false)}} to="/notes" className={tabClasses}>Notes</NavLink>
+                <NavLink onClick={()=>{toggleNav(false)}} to="/display" className={tabClasses}>Display</NavLink>
+                <NavLink onClick={()=>{toggleNav(false)}} to="/about" className={tabClasses}>About</NavLink>
             </div>
         </div>
     </>
