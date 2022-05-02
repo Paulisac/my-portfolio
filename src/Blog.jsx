@@ -8,24 +8,24 @@ function Blog() {
 
     
     const { slug } = useParams()
-    console.log(slug)
+    /* console.log(slug) */
 
     const [blog, setBlog] = useState(null)
     const [content, setContent] = useState([])
 
     const getData = useCallback(async () => {
     const q = query (collection(db, "blogs"), where("slug", "==", slug));
-    console.log(q); 
+    /* console.log(q);  */
     const querySnapshot = await getDocs(q);
     const queryData = querySnapshot.docs.map((detail) => ({
         ...detail.data(),
         id: detail.id,
     }))
-    console.log(queryData);
+    /* console.log(queryData); */
     queryData.map(async (d, id) => {
        setBlog(d);
        const querys = await getDocs(query(collection(db, `blogs/${d.id}/content`)))
-       console.log(querys);
+       /* console.log(querys); */
        setContent(querys.docs.map(doc => doc.data()))
     })
    
@@ -36,7 +36,7 @@ function Blog() {
        getData();
      }, [getData]);
 
-     console.log(content);
+     /* console.log(content); */
 
     const days = blog ? Math.floor(((Date.now() / 1000) - (blog.time.seconds)) / 60 /60 / 24) : "";
 
