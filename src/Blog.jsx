@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Mythought from './Mythought'
 import { useParams } from 'react-router-dom'
-import { collection, collectionGroup, getDocs,  getDoc, query,  where, doc} from "firebase/firestore";
+import { collection,  getDocs,  query,  where,} from "firebase/firestore";
 import db from "./index.js";
 
 function Blog() {
@@ -49,11 +49,12 @@ function Blog() {
                         <h1 className="text-loose font-bold text-2xl py-2">{blog.title}</h1>
                         <span className="text-loose font-normal text-sm py-2">Updated {days ? `${days} day${days > 1 ? 's' : ''} ago` : 'today'}</span>
                         {
-                            content.map((cont, i) => {
+                            content.map( (cont, i) => {
                                 if (cont.type === 'para')
-                                    return <p dangerouslySetInnerHTML={{__html: cont.content}} className="font-normal blog text-lg py-4" key={i}></p>
+                                    return <p dangerouslySetInnerHTML={{__html: cont.content}} className="font-normal blog text-lg py-4" key={i}></p>;
                                 else if (cont.type === 'image')
                                     return <img key={i} className="py-8" src={cont.url} alt="" />
+                                
                             })
                         }
                     </div> </> : <></>}
@@ -61,10 +62,10 @@ function Blog() {
             <div>
                 <div className="pt-28 px-4">
 
-{/*                 
+                
                     {
                       content.filter((r)=>r.slug !== slug).slice(0, 3).map((r, id) => <Mythought key={id} time={r.time} title={r.title} snippet={r.snippet} slug={r.slug} />)
-                    } */}
+                    }
  
                 </div>
             </div>
