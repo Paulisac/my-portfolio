@@ -8,24 +8,24 @@ function Blog() {
 
     
     const { slug } = useParams()
-    /* console.log(slug) */
+     /* console.log(slug) */ 
 
     const [blog, setBlog] = useState(null)
     const [content, setContent] = useState([])
 
     const getData = useCallback(async () => {
     const q = query (collection(db, "blogs"), where("slug", "==", slug));
-    /* console.log(q);  */
+     /* console.log(q);  */ 
     const querySnapshot = await getDocs(q);
     const queryData = querySnapshot.docs.map((detail) => ({
         ...detail.data(),
         id: detail.id,
     }))
-    /* console.log(queryData); */
+     /* console.log(queryData); */
     queryData.map(async (d, id) => {
        setBlog(d);
        const querys = await getDocs(query(collection(db, `blogs/${d.id}/content`)))
-       /* console.log(querys); */
+        /* console.log(querys);  */
        setContent(querys.docs.map(doc => doc.data()))
     })
    
@@ -36,10 +36,10 @@ function Blog() {
        getData();
      }, [getData]);
 
-     /* console.log(content); */
+     
 
     const days = blog ? Math.floor(((Date.now() / 1000) - (blog.time.seconds)) / 60 /60 / 24) : "";
-
+    const myDay = blog ? new Date(blog.time.seconds *1000) : ""; 
     return (<>
         <div className="my-28 px-4 md:px-0">
             {blog ?
@@ -51,10 +51,10 @@ function Blog() {
                         {
                             content.map( (cont, i) => {
                                 if (cont.type === 'para')
-                                    return <p dangerouslySetInnerHTML={{__html: cont.content}} className="font-normal blog text-lg py-4" key={i}></p>;
+                                    return <p dangerouslySetInnerHTML={{__html: cont.content}} className="font-normal blog text-lg py-4" key={i}></p>
                                 else if (cont.type === 'image')
                                     return <img key={i} className="py-8" src={cont.url} alt="" />
-                                
+                               else return " ";
                             })
                         }
                     </div> </> : <></>}
@@ -63,10 +63,12 @@ function Blog() {
                 <div className="pt-28 px-4">
 
                 
-                    {
-                      content.filter((r)=>r.slug !== slug).slice(0, 3).map((r, id) => <Mythought key={id} time={r.time} title={r.title} snippet={r.snippet} slug={r.slug} />)
-                    }
- 
+                {/*     {
+                      content.filter((r)=>r.slug !== slug).slice(0, 3).map((r, id) => 
+                      <Mythought key={id} time={(myDay.toLocaleString()).split(' ')[0]} title={r.title} snippet={r.snippet} slug={r.slug} /> )
+                      
+                    } */}
+
                 </div>
             </div>
         </div>
