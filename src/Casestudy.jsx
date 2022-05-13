@@ -11,10 +11,11 @@ function Casestudy() {
   const [casestudy, setCasestudy] = useState(null);
   const [content, setContent] = useState([]);
   
-  const q = query(collection(db, "casestudies"), where("slug", "==", slug));
+  
  /*  console.log(q); */
   
   const getData = useCallback(async () => {
+    const q = query(collection(db, "casestudies"), where("slug", "==", slug));
     const querySnapshot = await getDocs(q);
     const querys = await getDocs(
         collection(db, "casestudies"),
@@ -36,9 +37,14 @@ function Casestudy() {
   return (
     <>
       <div className="banner max-w-screen-xl m-auto my-24 px-4 md:px-0 ">
+      {casestudy ?
+                <>
         <div className=" ">
-          <PageView src={casestudy?.image} crossorigin />
+          <PageView src={casestudy.image} crossorigin />
+          
         </div>
+        </> :
+                <></>}
 
         {/* <ph1 className="font-bold text-center m-auto text-2xl text-loose py-8">{casestudy.title} </ph1> --> */}
       </div>

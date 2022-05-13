@@ -31,6 +31,7 @@ code {
 
 .header .navlink:hover{
   background-color: #f9fafb;
+  font-weight: 600;
 }
 
 .Footer {
@@ -46,6 +47,7 @@ code {
 
 .Footer a:hover {
   color:rgba(59, 130, 246);
+  font-weight: 600;
 }
 
  .header .navlink.active{
@@ -55,11 +57,14 @@ code {
 
  .About .resume a:hover {
     border-color: black;
+    background-color: rgb(220, 220, 220);
+    font-weight: 600;
  }
 
  .mythought .title:hover {
   text-decoration: underline;
   cursor: pointer;
+  
  }
 
  .Casestudycard:hover {

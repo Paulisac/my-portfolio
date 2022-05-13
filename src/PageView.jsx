@@ -27,7 +27,7 @@ const PageView = ({ style, className, src }) => {
       {html !== "" && (
         <div
           style={style}
-          className={className}
+          class={className}
           dangerouslySetInnerHTML={{ __html: html }}
         ></div>
       )}

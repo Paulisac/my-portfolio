@@ -22,7 +22,7 @@ function About(){
         </p><p className="leading-relaxed text-base pt-1 pb-8 ">
             If you need to get in touch or learn more about what I do, just drop in an email.</p>
             <div className=" grid md:grid-cols-4 gap-x-2">
-                <div className="col-span-1 font-bold text-2xl sm:pt-2">Experience</div>
+                <div className="col-span-1 font-bold text-2xl text-gray-700 sm:pt-2">Experience</div>
                 <div className="col-span-3 pt-2 ">
                     <h1 className={title}>UX Designer, Amnet Digital</h1>
                     <h3 className={footer}>MAR 2021 - PRESENT / HYDERABAD</h3>
@@ -43,7 +43,7 @@ function About(){
                     <p className={body}>My work has primarily focused on responsive design, interactions, interfaces, motion graphics, and branding.</p>
 
                 </div>
-                <div className="col-span-1 font-bold text-2xl sm:pt-2 pt-6 ">Education</div>
+                <div className="col-span-1 font-bold text-2xl sm:pt-2 text-gray-700 pt-6 ">Education</div>
                 <div className="col-span-3 pt-2">
                     <h1 className={title}>Bachelors in Animation, Andhra Loyola</h1>
                     <h3 className={footer}>MAR 2012 - APR 2015 / VIJAYAWADA</h3>
@@ -73,7 +73,7 @@ function About(){
                 </div>
                 
             </div>
-            <div className="my-12 resume m-auto flex justify-center"><a className=" text-center py-2 px-8  border-2  w-max text-gray-800 rounded"  href="https://firebasestorage.googleapis.com/v0/b/portfolio-64f3b.appspot.com/o/general%2FPaulisac_resume_010322.pdf?alt=media&token=ab9c9e62-f385-42f1-810e-903cc9850d20"  target="_blank" rel="noopener noreferrer" type="application/pdf" download="Paul_Resume">Download Resume</a></div>
+            <div className="my-12 resume m-auto flex justify-center"><a className=" text-center py-2 px-8  border-2 border-slate-500 w-max text-gray-800 rounded"  href="https://firebasestorage.googleapis.com/v0/b/portfolio-64f3b.appspot.com/o/general%2FPaul%20Isac_Resume.pdf?alt=media&token=85ecf2d1-50aa-42ca-b7c6-f01c79767898"  target="_blank" rel="noopener noreferrer" type="application/pdf" download="Paul_Resume">Download Resume</a></div>
         </div>
     </>
 }
