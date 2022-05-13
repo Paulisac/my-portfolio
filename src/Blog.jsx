@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import Mythought from './Mythought'
+/* import Mythought from './Mythought' */
 import { useParams } from 'react-router-dom'
 import { collection,  getDocs,  query,  where,} from "firebase/firestore";
 import db from "./index.js";
@@ -39,7 +39,7 @@ function Blog() {
      
 
     const days = blog ? Math.floor(((Date.now() / 1000) - (blog.time.seconds)) / 60 /60 / 24) : "";
-    const myDay = blog ? new Date(blog.time.seconds *1000) : ""; 
+   /*  const myDay = blog ? new Date(blog.time.seconds *1000) : "";  */
     return (<>
         <div className="my-28 px-4 md:px-0">
             {blog ?
