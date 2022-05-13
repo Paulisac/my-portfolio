@@ -73,7 +73,7 @@ function About(){
                 </div>
                 
             </div>
-            <div className="my-12 resume m-auto flex justify-center"><a className=" text-center py-2 px-8  border-2 border-slate-500 w-max text-gray-800 rounded"  href="https://firebasestorage.googleapis.com/v0/b/portfolio-64f3b.appspot.com/o/general%2FPaul%20Isac_Resume.pdf?alt=media&token=85ecf2d1-50aa-42ca-b7c6-f01c79767898"  target="_blank" rel="noopener noreferrer" type="application/pdf" download="Paul_Resume">Download Resume</a></div>
+            <div className="my-12 resume m-auto flex justify-center"><a className=" text-center py-2 px-8  border-2 border-slate-200 w-max text-gray-800 rounded"  href="https://firebasestorage.googleapis.com/v0/b/portfolio-64f3b.appspot.com/o/general%2FPaul%20Isac_Resume.pdf?alt=media&token=85ecf2d1-50aa-42ca-b7c6-f01c79767898"  target="_blank" rel="noopener noreferrer" type="application/pdf" download="Paul_Resume">Download Resume</a></div>
         </div>
     </>
 }

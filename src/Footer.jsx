@@ -1,6 +1,6 @@
 function Footer() {
     
-    const tabClasses = 'mx-8 my-4 font-bold md:font-normal'
+    const tabClasses = 'mx-8 my-4 font-bold text-gray-800 md:font-normal'
 
     return <> 
 

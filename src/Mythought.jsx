@@ -10,8 +10,8 @@ function Mythought({title, snippet, time, slug}) {
 
         <div>
             <div className="mythought max-w-screen-sm m-auto mb-7">
-                <NavLink to={"/notes/" + slug}  className="text-loose font-bold text-xl title ">{title} </NavLink>
-                <p className="text-loose font-normal text-base py-2">{snippet}</p>
+                <NavLink to={"/notes/" + slug}  className="text-loose text-blue-600 font-bold text-xl title ">{title} </NavLink>
+                <p className="text-loose font-normal text-base ">{snippet}</p>
                 <span className="text-loose font-base text-sm text-gray-500">Updated on {(myDay.toLocaleString()).split(' ')[0]}</span>
                 {/* <span className="text-loose font-base text-sm text-gray-500">Updated {days ? `${days} day${days > 1 ? 's' : ''} ago` : 'today'}</span> */}
             </div>
