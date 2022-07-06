@@ -1,17 +1,32 @@
-import Summary from "./Summary"
+import Summary from "./Summary";
+import db from './index.js';
+import { useCallback, useEffect, useState } from 'react';
+import { collection, getDocs } from "firebase/firestore";
 
-function About(){
+function About({profile, resume}){
 
     const title = 'text-loose font-bold text-lg text-gray-700'
     const footer = 'text-loose font-normal text-xs text-gray-400'
     const body = 'text-loose font-normal text-base py-1 mb-2 text-gray-600'
+
+    const [state, setState] = useState([]);
+     
+         
+   const getData=useCallback(async () => {
+       const querySnapshot= await getDocs(collection(db, "about"));
+       setState(querySnapshot.docs.map(doc => doc.data()))
+   },[])
+   
+   useEffect(() => {
+       getData()
+   },[getData])
 
     return <>
         <div className="About">
             <Summary title="Paul Isac" snippet="I'm a UX/UI designer with five years' experience." />
         </div>
         <div className="max-w-screen-sm m-auto my-28 About px-4">
-            <div className=" bg-gray-100 " onContextMenu={(e)=>{e.preventDefault()}} ><img className="border-white " alt="" src= "https://firebasestorage.googleapis.com/v0/b/portfolio-64f3b.appspot.com/o/general%2Fpaulisac.webp?alt=media&token=aa8a46cf-3ebe-4b4b-8748-a8496f554e31"></img></div>
+            <div className=" bg-gray-100 " onContextMenu={(e)=>{e.preventDefault()}} ><img className="border-white " alt="" src= {state.map((data) => (data.profile))} ></img></div>
             <p className="leading-relaxed text-base pt-8 pb-1">Hello again! I am Paul Isac, a UI/UX Designer from India. </p>
             <p className="leading-relaxed text-base py-1">
             Passionate about solving problems and creating meaningful experiences through research, interaction design, visual design and iteration.
@@ -61,19 +76,12 @@ function About(){
 
                     <h1 className={title}>Google UX Design Specialization, Coursera</h1>
                     <h3 className={footer}>MAY 2021 - NOV 2021 / ONLINE</h3>
-                    <p className={body}>Empathizing with users by creating empathy maps, personas, user stories, and user journey map.
-                    <br/>Defining user pain points. 
-                    <br/>Ideating design solutions using Crazy Eights, How Might We, and competitive audits.
-                    <br/>Creating wireframes and prototypes on paper and digitally.
-                    <br/>Developing mockups using visual design elements and principles.
-                    <br/>Designing in Figma and Adobe XD.
-                    <br/>Conducting interviews and usability studies.
-                    <br/>Considering accessibility at every point in the design process.</p>
+                    <p className={body}>Empathizing with users, Defining user pain points, Ideating design solutions, Creating wireframes and prototypes, Developing mockups,Designing in Figma and Adobe XD, Conducting interviews and usability studies and Considering accessibility at every point in the design process.</p>
 
                 </div>
                 
             </div>
-            <div className="my-12 resume m-auto flex justify-center"><a className=" text-center py-2 px-8  border-2 border-slate-200 w-max text-gray-800 rounded"  href="https://firebasestorage.googleapis.com/v0/b/portfolio-64f3b.appspot.com/o/general%2FPaul%20Isac_Resume.pdf?alt=media&token=85ecf2d1-50aa-42ca-b7c6-f01c79767898"  target="_blank" rel="noopener noreferrer" type="application/pdf" download="Paul_Resume">Download Resume</a></div>
+            <div className="my-12 resume m-auto flex justify-center"><a className=" text-center py-2 px-8  border-2 border-slate-200 w-max text-gray-800 rounded"  href={state.map((data) => (data.resume))}  target="_blank" rel="noopener noreferrer" type="application/pdf" download="Paul_Resume">Download Resume</a></div>
         </div>
     </>
 }
